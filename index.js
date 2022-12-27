@@ -1,28 +1,52 @@
-function Spa(){
-    return (
-    <HashRouter>
-        <div>
-            <NavBar/>
-            <UserContext.Provider value={{users:[{name:'abe', email:'abe@gmail.com',
-            password:'12345678', balance:1000}]}}>
-                <div className="container" style={{padding: "20px"}}>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/CreateAccount" component={CreateAccount} />
-                    <Route path="/login/" component={Login} />
-                    <Route path="/deposit/" component={Deposit} />
-                    <Route path="/withdraw/" component={Withdraw} />
-                    {/* <Route path="/transactions/" component={Transactions} /> */}
-                    <Route path="/balance/" component={Balance} />
-                    <Route path="/allData" component={AllData} />
-                </div>
-            </UserContext.Provider>
-        </div>
-    </HashRouter>
-    )
-}
+var express = require('express');
+var app = express();
+var cors = require('cors');
+var dal = require('./dal.js')
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// serve static files from public directory
+app.use(express.static('public'));
+app.use(cors());
 
-root.render(
-    <Spa/>
-)
+// Create user account
+// app.get('/createaccount/create/:name/:email/:password', function (req,res){
+//     res.send({
+//         name:       req.params.name,
+//         email:      req.params.email,
+//         password:   req.params.password
+//     });
+// });
+app.get('/createaccount/create/:name/:email/:password', function (req,res){
+    dal.create(req.params.name, req.params.email, req.params.password).
+        then((user) => {
+            console.log(user);
+            res.send(user);
+        });
+});
+
+
+// // Login user
+// app.get('/account/login/:email/:password', function (req, res){
+//     res.send({
+//         email:      req.params.email,
+//         password:   req.params.password
+//     });
+// });
+
+// Return all accounts
+app.get('/account/all', function (req, res){
+    dal.all().
+        then((docs) => {
+            console.log(docs);
+            res.send(docs);
+        });
+    // res.send({
+    //     name:       'abe',
+    //     email:      'abe@j.eth',
+    //     password:   'secret'
+    // });
+});
+
+// add listener
+var port = 5000;
+app.listen(port);
+console.log('Running on Port: ' + port);

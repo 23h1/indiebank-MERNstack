@@ -1,0 +1,24 @@
+{
+  "name": "indiebank-mernstack",
+  "version": "1.0.0",
+  "description": "A basic banking app\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[CMERN stack banking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/23h1/indiebank-MERNstack.git"
+  },
+  "author": "23h1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/23h1/indiebank-MERNstack/issues"
+  },
+  "homepage": "https://github.com/23h1/indiebank-MERNstack#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
+  }
+}
