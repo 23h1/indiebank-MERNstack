@@ -5,12 +5,12 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function (err, client) {
     console.log('Connected!');
 
     // database name
-    const dbNAme = 'myproject';
-    const db = client.db(dbNAme);
+    const dbName = 'myproject';
+    const db = client.db(dbName);
 
     // new user
     var name = 'user' + Math.floor(Math.random()*10000);
-    var email = name + '@mit.edu';
+    var email = name + '@red.pi';
 
     // insert into customer table
     var collection = db.collection('customers');
@@ -20,13 +20,13 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function (err, client) {
     });
 
     // read from customer's db
-    // var customers = db
-    //             .collection('customers')
-    //             .find()
-    //             .toArray(function(err, docs){
-    //                 console.log('Collection:', docs);
+    var customers = db
+                .collection('customers')
+                .find()
+                .toArray(function(err, docs){
+                    console.log('Collection:', docs);
 
-    //                 // clean up
-    //                 client.close();
-    //             });
+                    // clean up
+                    client.close();
+                });
 });
